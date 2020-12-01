@@ -48,6 +48,7 @@ const StickyDiv = styled.div`
 
 const MainWrapper = styled.div`
   margin-left: 50px;
+  margin-top: 50px;
   padding: 0px 10px;
   @media (max-width: 700px)
   {
@@ -71,11 +72,9 @@ const Layout = ({ children, transitionStatus }) => (
     <LogoStyled src={Logo} alt="Logo" height={40} />
       <SideBarStyled/>
       <MainWrapper>
-        <StickyDiv>
-          <FadingHeader pose={transitionStatus}>
+          <FadingHeader className = "Header" pose={transitionStatus}>
           <MainHeaderStyled/>
           </FadingHeader>
-        </StickyDiv>
         <Box as="main" px={[3, 5]}>
           {children}
         </Box>
