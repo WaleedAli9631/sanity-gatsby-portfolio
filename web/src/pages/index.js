@@ -1,103 +1,91 @@
-import React from 'react'
-import {graphql} from 'gatsby'
-import {
-  mapEdgesToNodes,
-  filterOutDocsWithoutSlugs,
-  filterOutDocsPublishedInTheFuture
-} from '../lib/helpers'
-import Container from '../components/container'
-import GraphQLErrorList from '../components/graphql-error-list'
-import ProjectPreviewGrid from '../components/project-preview-grid'
-import SEO from '../components/seo'
-import Layout from '../containers/layout'
+import React from "react";
+import { graphql } from "gatsby";
+import Img from "gatsby-image";
+import { Box } from "rebass";
+import styled from "styled-components";
+import AniLink from "gatsby-plugin-transition-link/AniLink";
+
+import { Description } from "../components/project-header";
+import Layout from "../components/layout";
+import LandHeader from "../components/land-header"
+import LandEnd from "../components/land-end"
+import "../style/reset.css";
+
+
+const Grid = styled(Box)`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: ${props => props.theme.space[3]}px;
+`;
+
+const ProjectGridItem = ({ project }) => {
+  return (
+    <AniLink
+      style={{ textDecoration: "none" }}
+      fade
+      to={`/projects/${project.slug.current}`}
+      duration={0.2}
+    >
+      {/* <Box width={[ 1, 2, 1 ]}>  */}
+        <Img fluid={project.featuredPhoto.asset.fluid} />
+        <Box mt={3}>
+          <Description>{project.title}</Description>
+          <Description>{project.description}</Description>
+        </Box>
+      {/* </Box> */}
+    </AniLink>
+  );
+};
+
+const Home = ({ data }) => {
+  const projects = data.projects.edges;
+  return (
+
+    <Layout>
+      
+      <div className = "Wrapper">
+        <div className = "Content">
+        <LandHeader/>
+        <Grid>
+          {projects.map(project => (
+            <ProjectGridItem key={project.node.title} project={project.node} />
+          ))}
+                  {projects.map(project => (
+            <ProjectGridItem key={project.node.title} project={project.node} />
+          ))}
+                  {projects.map(project => (
+            <ProjectGridItem key={project.node.title} project={project.node} />
+          ))}
+      </Grid>
+      <LandEnd/>
+        </div>
+      </div>
+      
+    </Layout>
+  );
+};
 
 export const query = graphql`
-  query IndexPageQuery {
-    site: sanitySiteSettings(_id: {regex: "/(drafts.|)siteSettings/"}) {
-      title
-      description
-      keywords
-    }
-    projects: allSanitySampleProject(
-      limit: 6
-      sort: {fields: [publishedAt], order: DESC}
-      filter: {slug: {current: {ne: null}}, publishedAt: {ne: null}}
-    ) {
+  {
+    projects: allSanityProject {
       edges {
         node {
-          id
-          mainImage {
-            crop {
-              _key
-              _type
-              top
-              bottom
-              left
-              right
-            }
-            hotspot {
-              _key
-              _type
-              x
-              y
-              height
-              width
-            }
-            asset {
-              _id
-            }
-            alt
-          }
           title
-          _rawExcerpt
           slug {
             current
+          }
+          description
+          featuredPhoto {
+            asset {
+              fluid(maxHeight: 200) {
+                ...GatsbySanityImageFluid
+              }
+            }
           }
         }
       }
     }
   }
-`
+`;
 
-const IndexPage = props => {
-  const {data, errors} = props
-
-  if (errors) {
-    return (
-      <Layout>
-        <GraphQLErrorList errors={errors} />
-      </Layout>
-    )
-  }
-
-  const site = (data || {}).site
-  const projectNodes = (data || {}).projects
-    ? mapEdgesToNodes(data.projects)
-      .filter(filterOutDocsWithoutSlugs)
-      .filter(filterOutDocsPublishedInTheFuture)
-    : []
-
-  if (!site) {
-    throw new Error(
-      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
-    )
-  }
-
-  return (
-    <Layout>
-      <SEO title={site.title} description={site.description} keywords={site.keywords} />
-      <Container>
-        <h1 hidden>Welcome to {site.title}</h1>
-        {projectNodes && (
-          <ProjectPreviewGrid
-            title='Latest projects'
-            nodes={projectNodes}
-            browseMoreHref='/archive/'
-          />
-        )}
-      </Container>
-    </Layout>
-  )
-}
-
-export default IndexPage
+export default Home;

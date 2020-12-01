@@ -1,19 +1,23 @@
-const {isFuture} = require('date-fns')
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+const path = require("path");
 
-async function createProjectPages (graphql, actions) {
-  const {createPage} = actions
-  const result = await graphql(`
-    {
-      allSanitySampleProject(filter: {slug: {current: {ne: null}}, publishedAt: {ne: null}}) {
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions;
+  const projectTemplate = path.resolve(`./src/templates/project.js`);
+
+  const query = `{
+    projects:allSanityProject {
         edges {
           node {
-            id
-            publishedAt
+            description
+            title
+            slug {
+              current
+            }
+            
+          }
+          next {
+            title
+            description
             slug {
               current
             }
@@ -21,27 +25,33 @@ async function createProjectPages (graphql, actions) {
         }
       }
     }
-  `)
+    `;
 
-  if (result.errors) throw result.errors
+  const result = await graphql(query);
 
-  const projectEdges = (result.data.allSanitySampleProject || {}).edges || []
+  if (result.errors) {
+    throw result.errors 
+ }
 
-  projectEdges
-    .filter(edge => !isFuture(edge.node.publishedAt))
-    .forEach(edge => {
-      const id = edge.node.id
-      const slug = edge.node.slug.current
-      const path = `/project/${slug}/`
 
-      createPage({
-        path,
-        component: require.resolve('./src/templates/project.js'),
-        context: {id}
-      })
-    })
-}
+ 
+  const projects = result.data.projects.edges;
 
-exports.createPages = async ({graphql, actions}) => {
-  await createProjectPages(graphql, actions)
-}
+  const createProjectPage = project => {
+    const next = project.next || projects[0].node;
+    createPage({
+      path: `/projects/${project.node.slug.current}`,
+      component: projectTemplate,
+      context: {
+        // currentProject: project,
+        title: project.node.title,
+        slug: project.node.slug.current,
+        nextSlug: next.slug.current,
+        nextProject: next
+        //...project.node
+      }
+    });
+  };
+
+  projects.forEach(createProjectPage);
+};

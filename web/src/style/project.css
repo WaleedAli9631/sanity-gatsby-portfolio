@@ -1,0 +1,12 @@
+.ProjectBlock{
+    font: "Times New Roman";
+    font-size: large;
+}
+.ProjectContainer{
+    display: flex;
+}
+
+.ProjectContentContainer{
+    width: 1000px;
+    margin: auto;
+}

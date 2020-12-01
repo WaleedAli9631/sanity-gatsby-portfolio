@@ -1,23 +1,88 @@
-import React from 'react'
-import Header from './header'
+import React from "react";
+import { ThemeProvider} from "styled-components";
+import styled from "styled-components";
+import { Box, Image } from "rebass";
+import posed from "react-pose";
+import MainHeaderStyled from "./main-header";
+import SideBarStyled from "./sidebar";
+import Logo from "../images/logo.svg";
+import "../style/reset.css";
+import Footer from "./footer";
 
-import '../styles/layout.css'
-import styles from './layout.module.css'
 
-const Layout = ({children, onHideNav, onShowNav, showNav, siteTitle}) => (
-  <>
-    <Header siteTitle={siteTitle} onHideNav={onHideNav} onShowNav={onShowNav} showNav={showNav} />
-    <div className={styles.content}>{children}</div>
-    <footer className={styles.footer}>
-      <div className={styles.footerWrapper}>
-        <div className={styles.siteInfo}>
-          © {new Date().getFullYear()}, Built with <a href='https://www.sanity.io'>Sanity</a> &amp;
-          {` `}
-          <a href='https://www.gatsbyjs.org'>Gatsby</a>
-        </div>
-      </div>
-    </footer>
-  </>
-)
+const theme = {
+  breakpoints: ["40em", "52em", "64em"],
+  space: [0, 4, 8, 16, 32, 64, 128, 256],
+  fonts: {
+    sans: "system-ui, sans-serif"
+  },
+  fontSizes: [12, 14, 16, 20, 24, 32, 46],
+  colors: {
+    grey: "#999",
+    black: "#1a1a1a",
+    red: "#e61428",
+    primary: "#1a1a1a",
+    seconday: "#999"
+  },
+ 
 
-export default Layout
+  
+};
+
+
+const FadingHeader = posed.header({
+  exiting: { opacity: 0 },
+  exited: { opacity: 0 },
+  entering: { opacity: 1 },
+  entered: { opacity: 1 }
+});
+
+const StickyDiv = styled.div`
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  z-index: 2;
+  background-color: white;
+  
+`;
+
+const MainWrapper = styled.div`
+  margin-left: 50px;
+  padding: 0px 10px;
+  @media (max-width: 700px)
+  {
+      margin-left: 0px;
+    
+  } 
+`;
+
+const LogoStyled = styled(Image)`
+  position: fixed;
+  @media (max-width: 700px)
+  {
+      display: none;
+  }
+`
+
+const Layout = ({ children, transitionStatus }) => (
+
+  <ThemeProvider theme={theme}>
+    <React.Fragment>
+    <LogoStyled src={Logo} alt="Logo" height={40} />
+      <SideBarStyled/>
+      <MainWrapper>
+        <StickyDiv>
+          <FadingHeader pose={transitionStatus}>
+          <MainHeaderStyled/>
+          </FadingHeader>
+        </StickyDiv>
+        <Box as="main" px={[3, 5]}>
+          {children}
+        </Box>
+      </MainWrapper>
+      <Footer/>
+    </React.Fragment>
+  </ThemeProvider>
+);
+
+export default Layout;
