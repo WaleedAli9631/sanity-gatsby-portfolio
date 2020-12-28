@@ -37,17 +37,15 @@ render(){
   <Box mx='auto' />
   <AniLink    
       style={{ textDecoration: "none", color: "#838383" }}
-      fade
-      to={`/contact`}
-      duration={0.2}
+      fade to={`/contact`}
+      duration={0.4}
       activeStyle={{ color: "black" }}
   >
     <HeaderText>Contact</HeaderText>
   </AniLink>
   <AniLink       
       style={{ textDecoration: "none", color: "#838383" }}
-      fade
-      to={`/about`}
+      fade to={`/about`}
       duration={0.2}
       activeStyle={{ color: "black" }}
   >
@@ -55,8 +53,7 @@ render(){
   </AniLink>
   <AniLink       
       style={{ textDecoration: "none", color: "#838383" }}
-      fade
-      to={`/`}
+      fade to={`/`}
       duration={0.2}
       activeStyle={{ color: "black" }}
   >

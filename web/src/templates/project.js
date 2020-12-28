@@ -101,7 +101,6 @@ const FadingNextProjectHeading = posed.div({
 
 
 const ProjectInner = ({ transitionStatus, project, data }) => {
-  console.log(project);
   const nextProjectUrl = `/projects/${project.nextSlug}`;
   const shouldTruncate = ["entering", "entered"].includes(transitionStatus);
 
@@ -109,6 +108,8 @@ const ProjectInner = ({ transitionStatus, project, data }) => {
     length: TRANSITION_LENGTH,
     trigger: () => {
       if (document) {
+        console.log("REEE");
+
         document.body.style.overflow = "hidden";
       }
     }
@@ -119,8 +120,12 @@ const ProjectInner = ({ transitionStatus, project, data }) => {
 
   const entryTransition = {
     delay: TRANSITION_LENGTH,
+    
     trigger: () => {
+      console.log("REEE");
+
       if (document && window) {
+        console.log("REEE");
         window.scrollTo(0, 0);
         document.body.style.overflow = "visible";
       }
@@ -160,7 +165,6 @@ const ProjectInner = ({ transitionStatus, project, data }) => {
 };
 
 const Project = ({ pageContext: projectShell, data }) => {
-  // console.log(data);
   const { project, next } = data;
   const aggregateProject = {
     ...projectShell,

@@ -65,7 +65,7 @@ const Layout = ({ children, transitionStatus }) => (
     <LogoStyled src={Logo} alt="Logo" height={40} />
       <SideBarStyled/>
       <MainWrapper>
-          <FadingHeader className = "Header" pose={transitionStatus}>
+          <FadingHeader className = "header" pose={transitionStatus}>
           <MainHeaderStyled/>
           </FadingHeader>
         <Box as="main" px={[3, 5]}>
