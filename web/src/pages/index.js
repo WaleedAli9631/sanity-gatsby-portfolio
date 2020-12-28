@@ -3,7 +3,7 @@ import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import { Box } from "rebass";
 import styled from "styled-components";
-import AniLink from "gatsby-plugin-transition-link/AniLink";
+import { Link } from "gatsby"
 
 import { Description } from "../components/project-header";
 import Layout from "../components/layout";
@@ -20,7 +20,7 @@ const Grid = styled(Box)`
 
 const ProjectGridItem = ({ project }) => {
   return (
-    <AniLink
+    <Link
       style={{ textDecoration: "none" }}
       fade
       to={`/projects/${project.slug.current}`}
@@ -33,7 +33,7 @@ const ProjectGridItem = ({ project }) => {
           <Description>{project.description}</Description>
         </Box>
       {/* </Box> */}
-    </AniLink>
+    </Link>
   );
 };
 

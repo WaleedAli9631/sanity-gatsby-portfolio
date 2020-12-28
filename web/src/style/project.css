@@ -3,9 +3,16 @@
     font-size: large;
 }
 .ProjectContainer{
+    width: 1000px;
+    margin: auto;
     display: flex;
-}
 
+}
+@media only screen and (max-width: 1000px) {
+    .ProjectContainer{
+        width: auto;
+    };
+}
 .ProjectContentContainer{
     width: 1000px;
     margin: auto;

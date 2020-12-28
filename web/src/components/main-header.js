@@ -1,8 +1,8 @@
 import React from "react";
 import { Box, Flex,Image } from "rebass";
 import styled from "styled-components";
-import AniLink from "gatsby-plugin-transition-link/AniLink";
 import Logo from "../images/logo.svg";
+import { Link } from "gatsby"
 
 
 const HeaderText = styled.div`
@@ -35,30 +35,30 @@ render(){
   return <Flex className={this.props.className}> 
  
   <Box mx='auto' />
-  <AniLink    
+  <Link    
       style={{ textDecoration: "none", color: "#838383" }}
-      fade to={`/contact`}
+      paintDrip to={`/contact`}
       duration={0.4}
       activeStyle={{ color: "black" }}
   >
     <HeaderText>Contact</HeaderText>
-  </AniLink>
-  <AniLink       
+  </Link>
+  <Link       
       style={{ textDecoration: "none", color: "#838383" }}
       fade to={`/about`}
       duration={0.2}
       activeStyle={{ color: "black" }}
   >
     <HeaderText p={2}>About</HeaderText>
-  </AniLink>
-  <AniLink       
+  </Link>
+  <Link       
       style={{ textDecoration: "none", color: "#838383" }}
       fade to={`/`}
       duration={0.2}
       activeStyle={{ color: "black" }}
   >
     <HeaderText p={2}>Home</HeaderText>
-  </AniLink>
+  </Link>
 
   <LogoStyled src={Logo} alt="Gatsbygram Logo" height={32} />
 </Flex>

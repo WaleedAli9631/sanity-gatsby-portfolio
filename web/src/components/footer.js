@@ -28,10 +28,9 @@ const FooterStyled = styled(Footer)`
   background-color: white;
   color: white;
   display: flex;
-  height: 30px;
   .icon{
     padding: 6px 8px 6px 16px;
-  height: 20px;
+    height: 20px;
   }
   .iconContainer{
       margin: auto;
