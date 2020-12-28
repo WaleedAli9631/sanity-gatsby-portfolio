@@ -37,14 +37,7 @@ const FadingHeader = posed.header({
   entered: { opacity: 1 }
 });
 
-const StickyDiv = styled.div`
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0px;
-  z-index: 2;
-  background-color: white;
-  
-`;
+
 
 const MainWrapper = styled.div`
   margin-left: 50px;
