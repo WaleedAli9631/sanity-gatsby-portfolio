@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Waleed Ali's Portfolio Site`,
-    description: `A portfolio site for Waleed Ali.`,
-    author: `Waleed Ali`,
+    title: `Gatsby Default Starter`,
+    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    author: `@gatsbyjs`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -18,7 +18,6 @@ module.exports = {
       options: {
         projectId: 'qbktwchk',
         dataset: 'production',
-        watchMode: true,
         // a token with read permissions is required
         // if you have a private dataset
         token: process.env.MY_SANITY_TOKEN,
