@@ -6,11 +6,16 @@ import Layout from "../components/layout";
 
 
 
-const client = require('@sanity/client')({
-    projectId: 'qbktwchk',
-    dataset: 'production',
-    useCdn: true
-  })
+const AboutContent = styled(PortableText)`
+  color: ${props => props.theme.colors.black};
+  font-family: ${props => props.theme.fonts.sans};
+  font-size: ${props => props.theme.fontSizes[2]}px;
+  line-height: 1.35em;
+  margin: 0;
+  @media (min-width: ${props => props.theme.breakpoints[1]}) {
+    font-size: ${props => props.theme.fontSizes[3]}px;
+  }
+`;
   
   const serializers = {
     types: {
@@ -31,7 +36,7 @@ class About1 extends React.Component  {
         <div className = {this.props.className}>
             <Layout>
                 <div className = "Content">
-                <PortableText className = "AboutBlock" blocks={this.props.body} serializers={serializers} />
+                <AboutContent blocks={this.props.body} serializers={serializers} />
                 </div> 
             </Layout>     
         </div>
