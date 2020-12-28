@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import PortableText from "@sanity/block-content-to-react";
 import TransitionLink, { TransitionState } from "gatsby-plugin-transition-link";
 import posed from "react-pose";
@@ -8,19 +9,13 @@ import Layout from "../components/layout";
 import ProjectHeader from "../components/project-header";
 import ProjectContent from "../components/project-content";
 import NextProjectHeading from "../components/next-project-heading";
-import styled, { css } from "styled-components";
 import "../style/project.css";
 
-const ProjectTextContent = styled.div`
-  color: ${props => props.theme.colors.black};
-  font-family: ${props => props.theme.fonts.sans};
-  font-size: ${props => props.theme.fontSizes[2]}px;
-  line-height: 1.35em;
-  margin: 0;
-  @media (min-width: ${props => props.theme.breakpoints[1]}) {
-    font-size: ${props => props.theme.fontSizes[3]}px;
-  }
-`;
+const client = require('@sanity/client')({
+  projectId: 'qbktwchk',
+  dataset: 'production',
+  useCdn: true
+})
 
 const serializers = {
   types: {
@@ -130,11 +125,11 @@ const ProjectInner = ({ transitionStatus, project, data }) => {
   return (
     <Layout transitionStatus={transitionStatus}>
       <div className = "ProjectContainer">
-        <ProjectTextContent>
+        <div className = "ProjectContentContainer">
         <FadingContent pose={transitionStatus}>
           <ProjectHeader project={project} />
           <ProjectContent photos={project.imagesGallery} />
-          <PortableText blocks={project._rawBody} serializers={serializers} />
+          <PortableText className = "ProjectBlock" blocks={project._rawBody} serializers={serializers} />
         </FadingContent>
         <TransitionLink
           style={{
@@ -153,7 +148,7 @@ const ProjectInner = ({ transitionStatus, project, data }) => {
             <ProjectHeader project={project.next} truncated={shouldTruncate} />
           </SlidingHeader>
         </TransitionLink>
-        </ProjectTextContent>
+        </div>
       </div>
     </Layout>
   );
