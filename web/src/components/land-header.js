@@ -1,8 +1,6 @@
 import React from "react";
-import { Box, Flex, Heading, Text } from "rebass";
-import styled, { css } from "styled-components";
-import Img from "gatsby-image";
-import { StaticQuery, graphql } from "gatsby";
+import { Heading, Text } from "rebass";
+import styled from "styled-components";
 import icon from "../images/icon.svg";
 
 
@@ -79,7 +77,7 @@ class LandHeader extends React.Component  {
 
       return(
         <div className = {this.props.className}>         
-            <img className = "icon" src = {icon}/>
+            <img className = "icon" src = {icon} alt = "Website icon"/>
             <HeadingTitle1>Hi, I'm Waleed. </HeadingTitle1>
             <HeadingTitle2>I'm a computer science student.</HeadingTitle2>
             <HeadingTitle3>These are my projects.</HeadingTitle3>

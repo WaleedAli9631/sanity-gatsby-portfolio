@@ -37,7 +37,7 @@ render(){
   <Box mx='auto' />
   <Link    
       style={{ textDecoration: "none", color: "#838383" }}
-      paintDrip to={`/contact`}
+      to={`/contact`}
       duration={0.4}
       activeStyle={{ color: "black" }}
   >
@@ -45,7 +45,7 @@ render(){
   </Link>
   <Link       
       style={{ textDecoration: "none", color: "#838383" }}
-      fade to={`/about`}
+      to={`/about`}
       duration={0.2}
       activeStyle={{ color: "black" }}
   >
@@ -53,7 +53,7 @@ render(){
   </Link>
   <Link       
       style={{ textDecoration: "none", color: "#838383" }}
-      fade to={`/`}
+      to={`/`}
       duration={0.2}
       activeStyle={{ color: "black" }}
   >

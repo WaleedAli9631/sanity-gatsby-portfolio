@@ -22,12 +22,11 @@ const ProjectGridItem = ({ project }) => {
   return (
     <Link
       style={{ textDecoration: "none" }}
-      fade
       to={`/projects/${project.slug.current}`}
       duration={0.2}
     >
       {/* <Box width={[ 1, 2, 1 ]}>  */}
-        <Img fluid={project.featuredPhoto.asset.fluid} />
+        <Img fluid={project.featuredPhoto.asset.fluid} alt = "Project's featured photo"/>
         <Box mt={3}>
           <Description>{project.title}</Description>
           <Description>{project.description}</Description>

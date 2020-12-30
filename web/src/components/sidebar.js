@@ -3,12 +3,7 @@ import styled from "styled-components";
 import GitHubLogo from "../images/icons8-github.svg";
 import LinkedinLogo from "../images/icons8-linkedin-circled.svg";
 
-const Icon = styled.a`
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  display: block;
-  
-`;
+
 
 
 class SideBar extends React.Component {

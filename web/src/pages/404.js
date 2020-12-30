@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
 import error from "../images/404-error.svg";
 
@@ -14,7 +14,7 @@ class Default404 extends React.Component  {
 
       return(
         <div className = {this.props.className}>         
-            <img className = "icon" src = {error}/>
+            <img className = "icon" src = {error} alt = "Error icon"/>
             <h1 className = "word1">Page not found. </h1>
             <AniLink
               className = "word1"
@@ -57,7 +57,6 @@ class Default404 extends React.Component  {
     background-color: white;
     border-radius: 10px;
     display: flex;
-    height: 400px;
     flex-direction: column;
     margin: 20px;
     align-content: flex-end;

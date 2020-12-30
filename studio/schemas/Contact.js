@@ -35,6 +35,13 @@ export default {
           },
           {
             type: 'image'
+          },
+          {
+            type: 'code',
+            options: {
+              withFilename: true,
+              theme: 'monokai'
+            }
           }
         ]
       }

@@ -7,7 +7,7 @@ import Project from './Project';
 import LandingImages from './LandingImages';
 import About from './About';
 import Contact from './Contact';
-
+import Email from './Emails.js'
 
 
 export default createSchema({
@@ -17,6 +17,7 @@ export default createSchema({
     Project,
     LandingImages,
     About,
-    Contact
+    Contact,
+    Email
   ])
 })

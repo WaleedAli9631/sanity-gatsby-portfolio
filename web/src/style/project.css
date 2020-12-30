@@ -5,15 +5,29 @@
 .ProjectContainer{
     width: 1000px;
     margin: auto;
-    display: flex;
 
 }
 @media only screen and (max-width: 1000px) {
     .ProjectContainer{
         width: auto;
-    };
+    }
+    .pictures{
+        margin: auto;
+        width: 100%;
+    }
+    
+    
 }
 .ProjectContentContainer{
     width: 1000px;
     margin: auto;
+}
+.pictures{
+    margin: auto;
+}
+
+.portableText{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
 }

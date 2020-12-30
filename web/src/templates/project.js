@@ -8,8 +8,12 @@ import Layout from "../components/layout";
 import ProjectHeader from "../components/project-header";
 import ProjectContent from "../components/project-content";
 import NextProjectHeading from "../components/next-project-heading";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import "../style/project.css";
+import imageUrlBuilder from '@sanity/image-url'
+import SyntaxHighlighter from 'react-syntax-highlighter';
+
+
 
 const ProjectTextContent = styled.div`
   color: ${props => props.theme.colors.black};
@@ -22,13 +26,62 @@ const ProjectTextContent = styled.div`
   }
 `;
 
+const StyledH1 = styled.h1`
+color: ${props => props.theme.colors.black};
+font-family: ${props => props.theme.fonts.sans};
+`;
+const StyledH2 = styled.h2`
+color: ${props => props.theme.colors.black};
+font-family: ${props => props.theme.fonts.sans};
+`;
+
+const client = require('@sanity/client')({
+  projectId: 'qbktwchk',
+  dataset: 'production',
+  useCdn: true
+})
+
+const builder = imageUrlBuilder(client)
+ 
+function urlFor(source) {
+  return builder.image(source)
+}
+
 const serializers = {
   types: {
-    code: props => (
-      <pre data-language={props.node.language}>
-        <code>{props.node.code}</code>
-      </pre>
-    )
+    code: ({node = {}}) => {
+      const {code,language} = node;
+      if (!code)
+      {
+        return null;
+      }
+      return <SyntaxHighlighter language= {language || 'text'} showLineNumbers = 'true' wrapLongLines = 'true'>
+      {code}
+    </SyntaxHighlighter>
+    },
+    block: props => {
+      if (props.node.style === "h1")
+      {
+        return <StyledH1>{props.children}</StyledH1>
+      }
+      if (props.node.style === "h2")
+      {
+        return <StyledH2>{props.children}</StyledH2>
+      }
+      return <ProjectTextContent>{props.children}</ProjectTextContent>
+   
+    },
+    image: ({ node }) => {
+      return (
+        <img
+          className = "pictures"
+          src={urlFor(node.asset).url()
+            }
+          alt = "Decriptive"
+        />
+      );
+    },
+
   }
 }
 
@@ -122,10 +175,7 @@ const ProjectInner = ({ transitionStatus, project, data }) => {
     delay: TRANSITION_LENGTH,
     
     trigger: () => {
-      console.log("REEE");
-
       if (document && window) {
-        console.log("REEE");
         window.scrollTo(0, 0);
         document.body.style.overflow = "visible";
       }
@@ -135,11 +185,17 @@ const ProjectInner = ({ transitionStatus, project, data }) => {
   return (
     <Layout transitionStatus={transitionStatus}>
       <div className = "ProjectContainer">
-        <ProjectTextContent>
+        <div>
         <FadingContent pose={transitionStatus}>
           <ProjectHeader project={project} />
           <ProjectContent photos={project.imagesGallery} />
-          <PortableText blocks={project._rawBody} serializers={serializers} />
+          <PortableText  
+          className = "portableText"
+          blocks={project._rawBody} 
+          serializers={serializers}
+          imageOptions={{w: 320, h: 240, fit: 'max'}} 
+          projectId = 'qbktwchk'
+          dataset = 'production'/>
         </FadingContent>
         <TransitionLink
           style={{
@@ -158,7 +214,7 @@ const ProjectInner = ({ transitionStatus, project, data }) => {
             <ProjectHeader project={project.next} truncated={shouldTruncate} />
           </SlidingHeader>
         </TransitionLink>
-        </ProjectTextContent>
+        </div>
       </div>
     </Layout>
   );

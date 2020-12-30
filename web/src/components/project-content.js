@@ -1,16 +1,9 @@
 import React from "react";
 import { Box } from "rebass";
-import styled from "styled-components";
-import Img from "gatsby-image";
-
-import AspectRatioBox from "./aspect-ratio-box";
 
 
-const Grid = styled(Box)`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: ${props => props.theme.space[4]}px;
-`;
+
+
 
 const ProjectContent = ({ photos }) => {
   return (
