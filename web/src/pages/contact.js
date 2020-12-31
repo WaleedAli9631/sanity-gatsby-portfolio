@@ -124,13 +124,12 @@ const Contact = props =>  {
                       <h1>Contact Me</h1>
                       <form 
                       onSubmit={handleSubmit(handlePost)}
-                      name="contact-form2"
+                      name="contact-form3"
                       method="POST"
-                      data-netlify-recaptcha="true"
                       data-netlify="true"
                       netlify-honeypot="got-ya"
                     >
-                      <input type="hidden" name="form-name" value="contact-form2" />
+                      <input type="hidden" name="form-name" value="contact-form3" />
                       <input
                         type="hidden"
                         name="formId"
@@ -173,7 +172,7 @@ const Contact = props =>  {
                         Don’t fill this out if you're human:
                         <input tabIndex="-1" name="got-ya" ref={register()} />
                       </label>
-                      <ReCAPTCHA className ="recapcha" size = 'normal' sitekey="6LdKCBsaAAAAAHYPAjzWbt054Nvff1kqHXAUsr6i" />
+                      {/* <ReCAPTCHA className ="recapcha" size = 'normal' sitekey="6LdKCBsaAAAAAHYPAjzWbt054Nvff1kqHXAUsr6i" /> */}
                       <div>
                         <button className = "submitButton" type="submit">Submit</button>
                       </div>
