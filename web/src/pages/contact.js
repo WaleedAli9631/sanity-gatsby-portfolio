@@ -6,7 +6,7 @@ import Layout from "../components/layout";
 import imageUrlBuilder from '@sanity/image-url'
 import SyntaxHighlighter from 'react-syntax-highlighter';
 // import { useForm } from "react-hook-form"
-// import { navigate } from "gatsby"
+import { navigate } from "gatsby"
 // import ReCAPTCHA from "react-google-recaptcha"
 
 
@@ -82,38 +82,33 @@ const serializers = {
   }
 }
 
+function encode(data) {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&')
+}
 
 const Contact = props =>  {
+  const [state, setState] = React.useState({})
 
-       // Initiate forms
-      //  const { register, handleSubmit, errors, reset } = useForm()
+  const handleChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value })
+  }
 
-      //  // Transforms the form data from the React Hook Form output to a format Netlify can read
-      //  const encode = (data) => {
-      //    return Object.keys(data)
-      //      .map(
-      //        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
-      //      )
-      //      .join("&")
-      //  }
-     
-      //  // Handles the post process to Netlify so we can access their serverless functions
-      //  const handlePost = (formData, event) => {
-      //    fetch(`/`, {
-      //      method: "POST",
-      //      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      //      body: encode({ "form-name": "contact-form", ...formData }),
-      //    })
-      //      .then((response) => {
-      //        navigate("")
-      //        reset()
-      //       //  console.log(response)
-      //      })
-      //      .catch((error) => {
-      //       //  console.log(error)
-      //      })
-      //    event.preventDefault()
-      //  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const form = e.target
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode({
+        'form-name': form.getAttribute('name'),
+        ...state,
+      }),
+    })
+      .then(() => navigate(form.getAttribute('action')))
+      .catch((error) => alert(error))
+  }
 
       return(
         <div className = {props.className}>
@@ -122,17 +117,45 @@ const Contact = props =>  {
                   <PortableText blocks={props.body} serializers={serializers} />
                   <div className = "form-style-6">
                       <h1>Contact Me</h1>
-                      <form name="contact3" method="POST"  data-netlify="true">
-                      <p>
-                        <label>Email: <input type="text" name="email" /></label>
-                      </p>
-                      <p>
-                        <label>Message: <textarea type="text" name="message"></textarea></label>
-                      </p>
-                      <p>
-                        <button className = "submitButton" type="submit">Send</button>
-                      </p>
-                    </form>
+                      <form
+                          name="contact"
+                          method="post"
+                          action="/"
+                          data-netlify="true"
+                          data-netlify-honeypot="bot-field"
+                          onSubmit={handleSubmit}
+                        >
+                          <input type="hidden" name="form-name" value="contact" />
+                          <p hidden>
+                            <label>
+                              Don’t fill this out: <input name="bot-field" onChange={handleChange} />
+                            </label>
+                          </p>
+                          <p>
+                            <label>
+                              Your name:
+                              <br />
+                              <input type="text" name="name" onChange={handleChange} />
+                            </label>
+                          </p>
+                          <p>
+                            <label>
+                              Your email:
+                              <br />
+                              <input type="email" name="email" onChange={handleChange} />
+                            </label>
+                          </p>
+                          <p>
+                            <label>
+                              Message:
+                              <br />
+                              <textarea name="message" onChange={handleChange} />
+                            </label>
+                          </p>
+                          <p>
+                            <button className ="submitButton" type="submit">Send</button>
+                          </p>
+                        </form>
                     </div>
                 </div> 
                 
