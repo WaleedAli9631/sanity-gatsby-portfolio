@@ -6,8 +6,8 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 import Project from './Project';
 import LandingImages from './LandingImages';
 import About from './About';
-import Contact from './Contact';
-import Email from './Emails.js'
+import ContactPortable from './ContactPortable';
+import contact from './contact.js'
 
 
 export default createSchema({
@@ -17,7 +17,7 @@ export default createSchema({
     Project,
     LandingImages,
     About,
-    Contact,
-    Email
+    contact,
+    ContactPortable
   ])
 })
