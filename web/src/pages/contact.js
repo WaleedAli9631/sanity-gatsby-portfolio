@@ -122,10 +122,7 @@ const Contact = props =>  {
                   <PortableText blocks={props.body} serializers={serializers} />
                   <div className = "form-style-6">
                       <h1>Contact Me</h1>
-                      <form name="contact2" method="POST" netlify-honeypot="bot-field" data-netlify="true">
-                      <p class="hidden">
-                        <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
-                      </p>
+                      <form name="contact3" method="POST"  data-netlify="true">
                       <p>
                         <label>Email: <input type="text" name="email" /></label>
                       </p>
