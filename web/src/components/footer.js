@@ -9,11 +9,11 @@ class Footer extends React.Component {
 render(){
   return <div className={this.props.className}>
       <div className = "iconContainer">
-      <a href={`https://github.com/WaleedAli9631`}>   
+      <a href={`https://github.com/WaleedAli9631`} target="_blank">   
          <img className = "icon" src={GitHubLogo} alt="GitHubLogo"/>
       </a>
       <a   
-      href={`https://www.linkedin.com/in/waleed-ali-6023151b3`}>
+      href={`https://www.linkedin.com/in/waleed-ali-6023151b3`} target="_blank">
         <img className = "icon" src={LinkedinLogo} alt="LinkedinLogo" /> 
       </a>    
       </div>

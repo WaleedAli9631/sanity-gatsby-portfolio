@@ -125,34 +125,3 @@ class LandHeader extends React.Component  {
    `;
    
   export default LandHeaderStyled;
-  //  export default () => (
-  //   <StaticQuery
-  //   query={graphql`
-  //     {
-  //       pictures: allSanityLandingImages {
-  //         edges {
-  //           node {
-  //             iconPhoto {
-  //               asset {
-  //                 fluid {
-  //                   ...GatsbySanityImageFluid
-  //                 }
-  //               }
-  //             }
-  //             featuredPhoto {
-  //               asset {
-  //                 fluid {
-  //                   ...GatsbySanityImageFluid
-  //                 }
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `}
-  //   render={(data) => (
-  //       <LandHeaderStyled pictures={data.pictures.edges} />
-  //     )}
-  //   />
-  //  );

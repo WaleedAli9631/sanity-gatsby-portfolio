@@ -133,23 +133,17 @@ const Contact = props =>  {
                           </p>
                           <p>
                             <label>
-                              Your name:
-                              <br />
-                              <input type="text" name="name" onChange={handleChange} />
+                              <input type="text" name="name" placeholder ="Name" onChange={handleChange} />
                             </label>
                           </p>
                           <p>
                             <label>
-                              Your email:
-                              <br />
-                              <input type="email" name="email" onChange={handleChange} />
+                              <input type="email" name="email" placeholder ="Email" onChange={handleChange} />
                             </label>
                           </p>
                           <p>
                             <label>
-                              Message:
-                              <br />
-                              <textarea name="message" onChange={handleChange} />
+                              <textarea name="message" placeholder ="Say hello!" onChange={handleChange} />
                             </label>
                           </p>
                           <p>
@@ -174,7 +168,7 @@ const Contact = props =>  {
 
     .form-style-6{
       max-width: 400px;
-      margin: 10px auto;
+      margin: 30px auto;
 
       font: 95% sans-serif;
       padding: 16px;
