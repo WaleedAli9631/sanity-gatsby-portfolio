@@ -124,7 +124,7 @@ const Contact = props =>  {
                       <h1>Contact Me</h1>
                       <form 
                       onSubmit={handleSubmit(handlePost)}
-                      name="contact-form"
+                      name="contact-form2"
                       method="POST"
                       data-netlify-recaptcha="true"
                       data-netlify="true"
