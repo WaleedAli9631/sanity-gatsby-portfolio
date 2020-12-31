@@ -5,9 +5,9 @@ import { StaticQuery, graphql } from "gatsby";
 import Layout from "../components/layout";
 import imageUrlBuilder from '@sanity/image-url'
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { useForm } from "react-hook-form"
-import { navigate } from "gatsby"
-import ReCAPTCHA from "react-google-recaptcha"
+// import { useForm } from "react-hook-form"
+// import { navigate } from "gatsby"
+// import ReCAPTCHA from "react-google-recaptcha"
 
 
 const ContactContent = styled.div`
@@ -86,34 +86,34 @@ const serializers = {
 const Contact = props =>  {
 
        // Initiate forms
-       const { register, handleSubmit, errors, reset } = useForm()
+      //  const { register, handleSubmit, errors, reset } = useForm()
 
-       // Transforms the form data from the React Hook Form output to a format Netlify can read
-       const encode = (data) => {
-         return Object.keys(data)
-           .map(
-             (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
-           )
-           .join("&")
-       }
+      //  // Transforms the form data from the React Hook Form output to a format Netlify can read
+      //  const encode = (data) => {
+      //    return Object.keys(data)
+      //      .map(
+      //        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+      //      )
+      //      .join("&")
+      //  }
      
-       // Handles the post process to Netlify so we can access their serverless functions
-       const handlePost = (formData, event) => {
-         fetch(`/`, {
-           method: "POST",
-           headers: { "Content-Type": "application/x-www-form-urlencoded" },
-           body: encode({ "form-name": "contact-form", ...formData }),
-         })
-           .then((response) => {
-             navigate("")
-             reset()
-            //  console.log(response)
-           })
-           .catch((error) => {
-            //  console.log(error)
-           })
-         event.preventDefault()
-       }
+      //  // Handles the post process to Netlify so we can access their serverless functions
+      //  const handlePost = (formData, event) => {
+      //    fetch(`/`, {
+      //      method: "POST",
+      //      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      //      body: encode({ "form-name": "contact-form", ...formData }),
+      //    })
+      //      .then((response) => {
+      //        navigate("")
+      //        reset()
+      //       //  console.log(response)
+      //      })
+      //      .catch((error) => {
+      //       //  console.log(error)
+      //      })
+      //    event.preventDefault()
+      //  }
 
       return(
         <div className = {props.className}>
@@ -122,60 +122,19 @@ const Contact = props =>  {
                   <PortableText blocks={props.body} serializers={serializers} />
                   <div className = "form-style-6">
                       <h1>Contact Me</h1>
-                      <form 
-                      onSubmit={handleSubmit(handlePost)}
-                      name="contact-form3"
-                      method="POST"
-                      data-netlify="true"
-                      netlify-honeypot="got-ya"
-                    >
-                      <input type="hidden" name="form-name" value="contact-form3" />
-                      <input
-                        type="hidden"
-                        name="formId"
-                        value="contact-form"
-                        ref={register()}
-                      />
-                      <label htmlFor="name">
-                        {errors.name && <span>Please input a name</span>}
-                        <input type="text" name="name" ref={register({ required: true })} placeholder = "Name"/>
-                      </label>
-                      <label htmlFor="email">
-                        {errors.email && <span>Please input a valid email</span>}
-                        <input
-                          type="email"
-                          name="email"
-                          ref={register({
-                            required: true,
-                            pattern: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
-                          })
-                        }
-                        placeholder = "Email"
-                        />
-                      </label>
-                      <label htmlFor="message">
-                        <textarea rows="4" name="message" ref={register()} placeholder = "Say hi!" />
-                      </label>
-                      <label
-                        htmlFor="got-ya"
-                        style={{
-                          position: "absolute",
-                          overflow: "hidden",
-                          clip: "rect(0 0 0 0)",
-                          height: "1px",
-                          width: "1px",
-                          margin: "-1px",
-                          padding: "0",
-                          border: "0",
-                        }}
-                      >
-                        Don’t fill this out if you're human:
-                        <input tabIndex="-1" name="got-ya" ref={register()} />
-                      </label>
-                      {/* <ReCAPTCHA className ="recapcha" size = 'normal' sitekey="6LdKCBsaAAAAAHYPAjzWbt054Nvff1kqHXAUsr6i" /> */}
-                      <div>
-                        <button className = "submitButton" type="submit">Submit</button>
-                      </div>
+                      <form name="contact2" method="POST" netlify-honeypot="bot-field" data-netlify="true">
+                      <p class="hidden">
+                        <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+                      </p>
+                      <p>
+                        <label>Email: <input type="text" name="email" /></label>
+                      </p>
+                      <p>
+                        <label>Message: <textarea type="text" name="message"></textarea></label>
+                      </p>
+                      <p>
+                        <button className = "submitButton" type="submit">Send</button>
+                      </p>
                     </form>
                     </div>
                 </div> 
