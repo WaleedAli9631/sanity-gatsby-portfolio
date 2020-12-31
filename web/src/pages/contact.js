@@ -119,63 +119,66 @@ const Contact = props =>  {
         <div className = {props.className}>
             <Layout>
                 <div className = "Content">
-                <PortableText blocks={props.body} serializers={serializers} />
-                <form
-                onSubmit={handleSubmit(handlePost)}
-                name="contact-form"
-                method="POST"
-                data-netlify-recaptcha="true"
-                data-netlify="true"
-                netlify-honeypot="got-ya"
-              >
-                <input type="hidden" name="form-name" value="contact-form" />
-                <input
-                  type="hidden"
-                  name="formId"
-                  value="contact-form"
-                  ref={register()}
-                />
-                <label htmlFor="name">
-                  <p>Name</p>
-                  {errors.name && <span>Error message</span>}
-                  <input name="name" ref={register({ required: true })} />
-                </label>
-                <label htmlFor="email">
-                  <p>Email</p>
-                  {errors.email && <span>Please format email correctly</span>}
-                  <input
-                    name="email"
-                    ref={register({
-                      required: true,
-                      pattern: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
-                    })}
-                  />
-                </label>
-                <label htmlFor="message">
-                  <p>Message</p>
-                  <textarea rows="4" name="message" ref={register()} />
-                </label>
-                <label
-                  htmlFor="got-ya"
-                  style={{
-                    position: "absolute",
-                    overflow: "hidden",
-                    clip: "rect(0 0 0 0)",
-                    height: "1px",
-                    width: "1px",
-                    margin: "-1px",
-                    padding: "0",
-                    border: "0",
-                  }}
-                >
-                  Don’t fill this out if you're human:
-                  <input tabIndex="-1" name="got-ya" ref={register()} />
-                </label>
-                <ReCAPTCHA sitekey="6LdKCBsaAAAAAHYPAjzWbt054Nvff1kqHXAUsr6i" />
-                <div>
-                  <button type="submit">Submit</button>
-                </div>
-              </form>
+                  <PortableText blocks={props.body} serializers={serializers} />
+                  <div className = "form-style-6">
+                      <h1>Contact Me</h1>
+                      <form 
+                      onSubmit={handleSubmit(handlePost)}
+                      name="contact-form"
+                      method="POST"
+                      data-netlify-recaptcha="true"
+                      data-netlify="true"
+                      netlify-honeypot="got-ya"
+                    >
+                      <input type="hidden" name="form-name" value="contact-form2" />
+                      <input
+                        type="hidden"
+                        name="formId"
+                        value="contact-form"
+                        ref={register()}
+                      />
+                      <label htmlFor="name">
+                        {errors.name && <span>Please input a name</span>}
+                        <input type="text" name="name" ref={register({ required: true })} placeholder = "Name"/>
+                      </label>
+                      <label htmlFor="email">
+                        {errors.email && <span>Please input a valid email</span>}
+                        <input
+                          type="email"
+                          name="email"
+                          ref={register({
+                            required: true,
+                            pattern: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+                          })
+                        }
+                        placeholder = "Email"
+                        />
+                      </label>
+                      <label htmlFor="message">
+                        <textarea rows="4" name="message" ref={register()} placeholder = "Say hi!" />
+                      </label>
+                      <label
+                        htmlFor="got-ya"
+                        style={{
+                          position: "absolute",
+                          overflow: "hidden",
+                          clip: "rect(0 0 0 0)",
+                          height: "1px",
+                          width: "1px",
+                          margin: "-1px",
+                          padding: "0",
+                          border: "0",
+                        }}
+                      >
+                        Don’t fill this out if you're human:
+                        <input tabIndex="-1" name="got-ya" ref={register()} />
+                      </label>
+                      <ReCAPTCHA className ="recapcha" size = 'normal' sitekey="6LdKCBsaAAAAAHYPAjzWbt054Nvff1kqHXAUsr6i" />
+                      <div>
+                        <button className = "submitButton" type="submit">Submit</button>
+                      </div>
+                    </form>
+                    </div>
                 </div> 
                 
             </Layout>     
@@ -186,21 +189,102 @@ const Contact = props =>  {
 }
 
     const ContactStyled = styled(Contact)`
-   
-    .Content{
-        margin: auto;
-        width: 1000px;
-        @media only screen and (max-width: 1000) {
-            width: auto;
-  }
+
+    .recapcha
+    {
     }
-    background-color: white;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-content: flex-end;
-    @media only screen and (max-width: 600px) {
+
+    .form-style-6{
+      max-width: 400px;
+      margin: 10px auto;
+
+      font: 95% sans-serif;
+      padding: 16px;
+      background: #F7F7F7;
+    }
+    .form-style-6 h1{
+      background: #999;
+      padding: 20px 0;
+      font-size: 140%;
+      font-weight: 300;
+      text-align: center;
+      color: #fff;
+      margin: -16px -16px 16px -16px;
+    }
+    .form-style-6 input[type="text"],
+    .form-style-6 input[type="date"],
+    .form-style-6 input[type="datetime"],
+    .form-style-6 input[type="email"],
+    .form-style-6 input[type="number"],
+    .form-style-6 input[type="search"],
+    .form-style-6 input[type="time"],
+    .form-style-6 input[type="url"],
+    .form-style-6 textarea,
+    .form-style-6 select 
+    {
+      -webkit-transition: all 0.30s ease-in-out;
+      -moz-transition: all 0.30s ease-in-out;
+      -ms-transition: all 0.30s ease-in-out;
+      -o-transition: all 0.30s ease-in-out;
+      outline: none;
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      width: 100%;
+      background: #fff;
+      margin-bottom: 4%;
+      border: 1px solid #ccc;
+      padding: 3%;
+      color: #555;
+      font: 95% Arial, Helvetica, sans-serif;
+    }
+    .form-style-6 input[type="text"]:focus,
+    .form-style-6 input[type="date"]:focus,
+    .form-style-6 input[type="datetime"]:focus,
+    .form-style-6 input[type="email"]:focus,
+    .form-style-6 input[type="number"]:focus,
+    .form-style-6 input[type="search"]:focus,
+    .form-style-6 input[type="time"]:focus,
+    .form-style-6 input[type="url"]:focus,
+    .form-style-6 textarea:focus,
+    .form-style-6 select:focus
+    {
+      box-shadow: 0 0 5px #999;
+      padding: 3%;
+      border: 1px solid #999;
+    }
+    
+    .submitButton{
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      width: 100%;
+      padding: 3%;
+      background: #999;
+      border-bottom: 2px solid #999;
+      border-top-style: none;
+      border-right-style: none;
+      border-left-style: none;	
+      color: #fff;
+    }
+    .submitButton{
+      background:#999;
+    }
+    .Content{
+      margin: auto;
+      width: 1000px;
+      @media only screen and (max-width: 600px) {
+          width: auto;
+}
   }
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+  @media only screen and (max-width: 600px) {
+}
+ 
    `;
    
 
