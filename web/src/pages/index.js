@@ -49,12 +49,7 @@ const Home = ({ data }) => {
           {projects.map(project => (
             <ProjectGridItem key={project.node.title} project={project.node} />
           ))}
-                  {projects.map(project => (
-            <ProjectGridItem key={project.node.title} project={project.node} />
-          ))}
-                  {projects.map(project => (
-            <ProjectGridItem key={project.node.title} project={project.node} />
-          ))}
+                  
       </Grid>
       <LandEnd/>
         </div>
