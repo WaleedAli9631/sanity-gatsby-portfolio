@@ -9,11 +9,11 @@ class Footer extends React.Component {
 render(){
   return <div className={this.props.className}>
       <div className = "iconContainer">
-      <a href={`https://github.com/WaleedAli9631`} target="_blank">   
+      <a href={`https://github.com/WaleedAli9631`} target="_blank" rel="noreferrer">   
          <img className = "icon" src={GitHubLogo} alt="GitHubLogo"/>
       </a>
       <a   
-      href={`https://www.linkedin.com/in/waleed-ali-6023151b3`} target="_blank">
+      href={`https://www.linkedin.com/in/waleed-ali-6023151b3`} target="_blank" rel="noreferrer">
         <img className = "icon" src={LinkedinLogo} alt="LinkedinLogo" /> 
       </a>    
       </div>
@@ -22,8 +22,11 @@ render(){
 }
 
 const FooterStyled = styled(Footer)`
-
-  margin-top: 10px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
   margin-top: 10px;
   background-color: white;
   color: white;

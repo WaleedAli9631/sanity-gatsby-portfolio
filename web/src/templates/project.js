@@ -98,6 +98,7 @@ query ($slug: String, $nextSlug: String){
       }
     }
     title
+    category
     description
     featuredPhoto{
       asset{
@@ -111,6 +112,7 @@ query ($slug: String, $nextSlug: String){
   {
     title
     description
+    category
     featuredPhoto{
       asset{
         fluid{
@@ -153,7 +155,7 @@ const FadingNextProjectHeading = posed.div({
 });
 
 
-const ProjectInner = ({ transitionStatus, project, data }) => {
+const ProjectInner = ({ transitionStatus, project}) => {
   const nextProjectUrl = `/projects/${project.nextSlug}`;
   const shouldTruncate = ["entering", "entered"].includes(transitionStatus);
 
@@ -161,15 +163,11 @@ const ProjectInner = ({ transitionStatus, project, data }) => {
     length: TRANSITION_LENGTH,
     trigger: () => {
       if (document) {
-        console.log("REEE");
-
         document.body.style.overflow = "hidden";
       }
     }
   };
 
-  // const title = project.title;
-  // const description = project.description;
 
   const entryTransition = {
     delay: TRANSITION_LENGTH,

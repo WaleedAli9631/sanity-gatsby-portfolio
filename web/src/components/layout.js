@@ -46,7 +46,8 @@ const MainWrapper = styled.div`
   @media (max-width: 700px)
   {
       margin-left: 0px;
-    
+      margin-bottom: 10px;
+
   } 
 `;
 
@@ -66,7 +67,7 @@ const Layout = ({ children, transitionStatus }) => (
       <SideBarStyled/>
       <MainWrapper>
           <FadingHeader className = "header" pose={transitionStatus}>
-          <MainHeaderStyled/>
+            <MainHeaderStyled/>
           </FadingHeader>
         <Box as="main" px={[3, 5]}>
           {children}

@@ -16,11 +16,24 @@ export const Title = styled(Heading)`
   }
 `;
 
+export const ProjectBoxTitle = styled(Text)`
+  color: ${props => props.theme.colors.black};
+  font-family: ${props => props.theme.fonts.sans};
+  font-weight: 600;
+  font-size: ${props => props.theme.fontSizes[2]}px;
+  line-height: 1.35em;
+  margin: 0;
+  text-decoration: underline;
+  @media (min-width: ${props => props.theme.breakpoints[1]}) {
+    font-size: ${props => props.theme.fontSizes[4]}px;
+  }
+`;
+
 export const Description = styled(Text)`
   color: ${props => props.theme.colors.black};
   font-family: ${props => props.theme.fonts.sans};
   font-weight: 600;
-  font-size: ${props => props.theme.fontSizes[3]}px;
+  font-size: ${props => props.theme.fontSizes[2]}px;
   line-height: 1.35em;
   margin: 0;
   @media (min-width: ${props => props.theme.breakpoints[1]}) {
@@ -63,14 +76,14 @@ const Hero = ({ photo, truncated }) => {
 };
 
 const ProjectHeader = ({ project, truncated }) => (
-  // console.log(project),
+  console.log(project),
 
   <Box>
     <Flex flexWrap="wrap">
       <Box width={[1, 1 / 2]}>
         <Title as="h1">{project.title}</Title>
         <Box mt={3}>
-          <Category as="h3">Category</Category>
+          <Category as="h3">{project.category}</Category>
         </Box>
       </Box>
       <Box width={[1, 1 / 2]}>

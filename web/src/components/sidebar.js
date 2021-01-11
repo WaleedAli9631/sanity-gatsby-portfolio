@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import GitHubLogo from "../images/icons8-github.svg";
 import LinkedinLogo from "../images/icons8-linkedin-circled.svg";
+import { motion } from "framer-motion"
 
 
 
@@ -10,13 +11,18 @@ class SideBar extends React.Component {
 render(){
   return <div className={this.props.className}>
       <div className = "iconContainer">
-      <a href={`https://github.com/WaleedAli9631`} target="_blank">   
-         <img className = "icon" src={GitHubLogo} alt="GitHubLogo"/>
-      </a>
-      <a   
-      href={`https://www.linkedin.com/in/waleed-ali-6023151b3`} target="_blank">
-        <img className = "icon" src={LinkedinLogo} alt="LinkedinLogo" /> 
-      </a>    
+        <motion.div whileHover={{ scale: 1.03 }}>
+          <a href={`https://github.com/WaleedAli9631`} target="_blank" rel="noreferrer">   
+          <img className = "icon" src={GitHubLogo} alt="GitHubLogo"/>
+        </a>
+        </motion.div>
+
+      <motion.div whileHover={{ scale: 1.03 }}>
+        <a   
+        href={`https://www.linkedin.com/in/waleed-ali-6023151b3`} target="_blank" rel="noreferrer">
+          <img className = "icon" src={LinkedinLogo} alt="LinkedinLogo" /> 
+        </a>  
+      </motion.div>
       </div>    
   </div>
   }

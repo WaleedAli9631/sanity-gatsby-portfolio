@@ -6,13 +6,18 @@ import styled from "styled-components";
 import { Link } from "gatsby"
 
 import { Description } from "../components/project-header";
+import { ProjectBoxTitle } from "../components/project-header";
+
 import Layout from "../components/layout";
 import LandHeader from "../components/land-header"
 import LandEnd from "../components/land-end"
+import { motion } from "framer-motion"
+
 import "../style/reset.css";
 
 
 const Grid = styled(Box)`
+
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: ${props => props.theme.space[3]}px;
@@ -20,18 +25,16 @@ const Grid = styled(Box)`
 
 const ProjectGridItem = ({ project }) => {
   return (
-    <Link
+    <Link 
       style={{ textDecoration: "none" }}
       to={`/projects/${project.slug.current}`}
       duration={0.2}
     >
-      {/* <Box width={[ 1, 2, 1 ]}>  */}
         <Img fluid={project.featuredPhoto.asset.fluid} alt = "Project's featured photo"/>
-        <Box mt={3}>
-          <Description>{project.title}</Description>
+        <Box className = "ProjectDescription" mt={3}>
+          <ProjectBoxTitle>{project.title}</ProjectBoxTitle>
           <Description>{project.description}</Description>
         </Box>
-      {/* </Box> */}
     </Link>
   );
 };
@@ -44,10 +47,12 @@ const Home = ({ data }) => {
       
       <div className = "Wrapper">
         <div className = "Content">
-        <LandHeader/>
-        <Grid>
+        <LandHeader />
+        <Grid >
           {projects.map(project => (
-            <ProjectGridItem key={project.node.title} project={project.node} />
+            <motion.div key={project.node.title} whileHover={{ scale: 1.03 }} className = "ProjectBox">
+               <ProjectGridItem project={project.node} />
+            </motion.div>
           ))}
                   
       </Grid>

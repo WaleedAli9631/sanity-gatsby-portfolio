@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Flex,Image } from "rebass";
 import styled from "styled-components";
 import Logo from "../images/logo.svg";
-import { Link } from "gatsby"
+import TransitionLink from "gatsby-plugin-transition-link";
 
 
 const HeaderText = styled.div`
@@ -35,32 +35,29 @@ render(){
   return <Flex className={this.props.className}> 
  
   <Box mx='auto' />
-  <Link    
+  <TransitionLink    
       style={{ textDecoration: "none", color: "#838383" }}
       to={`/contact`}
-      duration={0.4}
       activeStyle={{ color: "black" }}
   >
     <HeaderText>Contact</HeaderText>
-  </Link>
-  <Link       
+  </TransitionLink>
+  <TransitionLink       
       style={{ textDecoration: "none", color: "#838383" }}
       to={`/about`}
-      duration={0.2}
       activeStyle={{ color: "black" }}
   >
     <HeaderText p={2}>About</HeaderText>
-  </Link>
-  <Link       
+  </TransitionLink>
+  <TransitionLink       
       style={{ textDecoration: "none", color: "#838383" }}
       to={`/`}
-      duration={0.2}
       activeStyle={{ color: "black" }}
   >
     <HeaderText p={2}>Home</HeaderText>
-  </Link>
+  </TransitionLink>
 
-  <LogoStyled src={Logo} alt="Gatsbygram Logo" height={32} />
+  <LogoStyled src={Logo} alt="Site logo" height={32} />
 </Flex>
   }
 }
